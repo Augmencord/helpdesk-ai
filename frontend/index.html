@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI-Powered IT Helpdesk — Get instant support for password resets, login issues, and leave balance inquiries.">
+    <title>Helpdesk AI — Intelligent IT Support</title>
+
+    <!-- Google Fonts — Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated background orbs -->
+    <div class="bg-orbs" aria-hidden="true">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header" id="app-header">
+            <div class="header-left">
+                <div class="logo-icon" aria-hidden="true">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        <circle cx="12" cy="10" r="1" fill="currentColor"/>
+                        <circle cx="8" cy="10" r="1" fill="currentColor"/>
+                        <circle cx="16" cy="10" r="1" fill="currentColor"/>
+                    </svg>
+                </div>
+                <div class="header-text">
+                    <h1>Helpdesk AI</h1>
+                    <span class="header-status">
+                        <span class="status-dot" id="status-dot"></span>
+                        <span id="status-text">Online</span>
+                    </span>
+                </div>
+            </div>
+            <button class="btn-new-session" id="btn-new-session" title="Start new conversation">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="1 4 1 10 7 10"/>
+                    <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+                </svg>
+                New Chat
+            </button>
+        </header>
+
+        <!-- Chat Messages Area -->
+        <main class="chat-container" id="chat-container">
+            <div class="messages-list" id="messages-list">
+                <!-- Welcome message -->
+                <div class="message ai-message welcome-message" id="welcome-message">
+                    <div class="message-avatar ai-avatar" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            <p class="welcome-title">👋 Welcome to Helpdesk AI!</p>
+                            <p>I'm your intelligent IT support assistant. I can help you with:</p>
+                            <ul class="capabilities-list">
+                                <li>🔑 <strong>Password Resets</strong> — Forgot your password? I'll send you a reset link.</li>
+                                <li>🔐 <strong>Login Issues</strong> — Can't log in? I'll check your account status.</li>
+                                <li>📅 <strong>Leave Balance</strong> — Want to know your PTO? I'll look it up.</li>
+                            </ul>
+                            <p class="welcome-cta">Try one of the quick actions below, or type your issue!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typing indicator -->
+            <div class="typing-indicator" id="typing-indicator" hidden>
+                <div class="message-avatar ai-avatar" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                </div>
+                <div class="typing-dots">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Quick Actions / Suggestion Chips -->
+        <div class="quick-actions" id="quick-actions">
+            <button class="chip" data-message="I forgot my password, how to reset it?" id="chip-password">
+                🔑 Reset Password
+            </button>
+            <button class="chip" data-message="I can't login as password is incorrect" id="chip-login">
+                🔐 Login Issue
+            </button>
+            <button class="chip" data-message="How to see my leave balance?" id="chip-leave">
+                📅 Leave Balance
+            </button>
+        </div>
+
+        <!-- Input Area -->
+        <form class="input-area" id="input-form">
+            <div class="input-wrapper">
+                <textarea
+                    id="message-input"
+                    placeholder="Describe your IT issue..."
+                    rows="1"
+                    required
+                    autocomplete="off"
+                ></textarea>
+                <button type="submit" class="btn-send" id="btn-send" title="Send message">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"/>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                    </svg>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Toast container for error messages -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
