@@ -30,11 +30,11 @@ except ImportError:
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifespan handler."""
-    print("🚀 Helpdesk AI server starting...")
+    print("Helpdesk AI server starting...")
     print("   Agent model :", agent.MODEL_NAME)
     print("   Tools loaded:", [t.__name__ for t in agent.TOOLS])
     yield
-    print("👋 Helpdesk AI server shutting down.")
+    print("Helpdesk AI server shutting down.")
 
 
 # ---------------------------------------------------------------------------
