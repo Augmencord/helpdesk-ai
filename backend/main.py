@@ -4,6 +4,8 @@ Helpdesk AI — FastAPI Server
 REST API that bridges the frontend chat UI with the Gemini-powered agent.
 """
 
+import os
+import sys
 import uuid
 import traceback
 from contextlib import asynccontextmanager
@@ -12,7 +14,14 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-import agent  # our agent module
+_script_dir = os.path.dirname(os.path.abspath(__file__))
+if _script_dir not in sys.path:
+    sys.path.insert(0, _script_dir)
+
+try:
+    import agent
+except ImportError:
+    from backend import agent
 
 
 # ---------------------------------------------------------------------------

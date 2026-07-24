@@ -6,22 +6,35 @@ registers custom tools, and manages per-session chat state.
 """
 
 import os
+import sys
 from google import genai
 from google.genai import types
 from dotenv import load_dotenv
 
-from tools import trigger_password_reset, check_account_status, get_leave_balance
+# Ensure script folder is in sys.path for relative module imports
+_script_dir = os.path.dirname(os.path.abspath(__file__))
+if _script_dir not in sys.path:
+    sys.path.insert(0, _script_dir)
+
+try:
+    from tools import trigger_password_reset, check_account_status, get_leave_balance
+except ImportError:
+    from backend.tools import trigger_password_reset, check_account_status, get_leave_balance
 
 # ---------------------------------------------------------------------------
-# Load environment variables
+# Load environment variables (check both cwd and script directory)
 # ---------------------------------------------------------------------------
-load_dotenv()
+env_path = os.path.join(_script_dir, ".env")
+if os.path.exists(env_path):
+    load_dotenv(env_path)
+else:
+    load_dotenv()
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 if not GEMINI_API_KEY:
     raise RuntimeError(
         "GEMINI_API_KEY is not set. "
-        "Copy .env.template to .env and add your key."
+        "Please create backend/.env file and set GEMINI_API_KEY=your_key_here"
     )
 
 MODEL_NAME = "gemini-2.5-flash"
