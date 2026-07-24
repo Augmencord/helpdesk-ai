@@ -136,11 +136,12 @@ Open a **new terminal** (keep the backend running) and serve the frontend:
 
 ```bash
 cd frontend
-python -m http.server 3000
+python -m http.server 5500
 ```
 
-Then open your browser to: **http://localhost:3000**
+Then open your browser to: **http://localhost:5500**
 
+> **Note:** Port 5500 (or 8080) can be used if port 3000 is already occupied by another service on your system. All of these ports (`3000`, `5500`, `8080`) are pre-configured in the FastAPI CORS middleware.
 > **Alternative:** You can also directly open `frontend/index.html` in your browser. The CORS configuration supports the `null` origin for file:// URLs.
 
 ---
